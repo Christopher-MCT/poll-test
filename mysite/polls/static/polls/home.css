@@ -1,0 +1,54 @@
+h1{
+    color: black;
+   
+}
+
+body {
+    background: rgb(240, 240, 240);
+}
+
+/*<img src="/imgs/cards0-img.jpg" alt="muestra">
+                 lorem ipsum*/
+
+.tarjeta{
+     display:flex;
+     flex-direction:column;
+     justify-content:space-between;
+     
+     width:420px;
+     border: 1px solid lightgray;
+     box-shadow: 2px 2px 8px 4px #d3d3d3d1;
+     border-radius:15px;
+     font-family: sans-serif;
+}
+.titulo{
+     font-size: 24px;
+     padding: 10px 10px 0 10px;
+     text-align:  center;
+}
+.cuerpo{
+     padding: 10px;
+    }
+.pie{
+ 
+background: #6699ff;
+     border-radius:0 0 15px 15px;
+     color: white;
+     padding: 10px;
+     text-align:center;
+     text-decoration: none;
+
+}
+.pie a{
+     text-decoration: none;
+     color: white;
+    }
+.pie a:after {
+     position: absolute;
+     top: 0;
+     right: 0;
+     bottom: 0;
+     left: 0;
+     z-index: 1;
+     content: ""
+    }
