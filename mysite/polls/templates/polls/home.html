@@ -1,21 +1,22 @@
+{% extends "base.html" %}
 {% load static %}
 
 
 
-<!DOCTYPE html>
 
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
 
+ {% block content %}
         <link rel="stylesheet" href="{% static 'polls/home.css' %}">
-    </head>
-    <body>
+  
         
+    {% if user.is_authenticated %}
+        <h1>Hola {{ user.username }}</h1>
+        <a href="{% url 'polls:sign_out' %}">Cerrar sesión</a>
+    {% else %}
+        <a href="{% url 'polls:register' %}">Registrate</a>
+        <a href="{% url 'polls:sign_in' %}">Iniciar sesión</a>
+    {% endif %}
+
         <h1>Hola esta es otra prueba</h1>
 
         <div class="tarjeta">
@@ -28,5 +29,4 @@
            
             </div>
         </div>
-    </body>
-</html>
+ {% endblock content %}

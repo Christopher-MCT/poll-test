@@ -1,11 +1,19 @@
 
-from django.shortcuts import render, get_object_or_404
-from .models import Question, Choice
+from django.shortcuts import render, get_object_or_404, redirect
+from .models import Question, Choice, NewUser
+from django.contrib.auth import login, authenticate
+from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.auth.models import User
+
+
 from django.urls import reverse
 from django.views import generic
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, CreateView
 from django.utils import timezone
 from django.http import HttpResponseRedirect, HttpResponse
+
+from .forms import SignupForm
+
 
 
 
@@ -61,6 +69,33 @@ def vote(request, question_id):
             # Always return an HttpResponseRedirect after successfully dealing
             # with POST data. This prevents data from being posted twice if a
             # user hits the Back button.
-            return HttpResponseRedirect(reverse('polls:results', args=(question.id,)))
+            return HttpResponseRedirect(reverse('polls:results', args=(question.id)))
+        
+class CreatePollView(TemplateView):
+      template_name = "polls/create_poll.html"
+  
     
+    
+class SignUpView(CreateView):
+    model= NewUser
+    form_class = SignupForm
+    template_name = 'usuarios/forms.html'
 
+    def form_valid(self, form):
+         """
+         En este parte, si el formulario es valido guardamos lo que se obtiene de
+          él y usamos authenticate para que el usuario incie sesión luego de 
+          haberse registrado y lo redirigimos al index
+         """
+         form.save()
+         usuario= form.cleaned_data.get('username')
+         password = form.cleaned_data.get('password1')
+         usuario = authenticate(username=usuario, password=password )
+         login(self.request, usuario)
+         return redirect('/')
+
+class SignInView(LoginView):
+     template_name = 'usuarios/login_user.html'
+
+class SignOutView(LogoutView):
+    pass

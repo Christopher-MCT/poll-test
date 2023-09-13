@@ -71,6 +71,12 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'mysite.wsgi.application'
 
+# User URLS for logins
+LOGIN_URL = '/inicia-sesion/'
+LOGIN_REDIRECT_URL = 'home/'
+LOGOUT_REDIRECT_URL = '/'
+
+
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
