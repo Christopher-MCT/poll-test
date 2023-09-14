@@ -1,11 +1,11 @@
 from django.contrib import admin
 
-from .models import Question, Choice, NewUser
+from .models import Question, Choice, Usuario
 
 
-@admin.register(NewUser)
+@admin.register(Usuario)
 class PerfilAdmin(admin.ModelAdmin):
-    list_display = ('usuario', 'bio', 'web')
+    list_display = ('usuario')
 
 class ChoiceInline(admin.TabularInline):
     
