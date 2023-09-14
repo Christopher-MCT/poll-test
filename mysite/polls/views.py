@@ -12,7 +12,7 @@ from django.views.generic import TemplateView, CreateView
 from django.utils import timezone
 from django.http import HttpResponseRedirect, HttpResponse
 
-from .forms import SignupForm
+#from .forms import SignupForm
 
 
 
