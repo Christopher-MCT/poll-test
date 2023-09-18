@@ -1,5 +1,5 @@
 
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect, reverse
 from .models import Question, Choice
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
@@ -74,7 +74,11 @@ class LoginView(View):
     template_name = 'registration/login.html'
 
     def get(self, request):
-        return render(request, self.template_name)
+        # import pdb; pdb.set_trace()
+        if request.user.is_authenticated:
+            return redirect(reverse('polls:main'))
+        else: 
+            return render(request, self.template_name)
 
     def post(self, request):
         username = request.POST['username']
@@ -84,7 +88,7 @@ class LoginView(View):
 
         if user is not None:
             login(request, user)
-            return redirect('main')  # Reemplaza 'dashboard' con la URL a la que deseas redirigir al usuario después de iniciar sesión.
+            return redirect('main')  #  redirigir al usuario después de iniciar sesión.
         else:
             # Handle authentication failure (e.g., show an error message)
             return render(request, self.template_name, {'error_message': 'Invalid login credentials'})
