@@ -1,5 +1,5 @@
 from django.urls import path
-
+from django.contrib.auth import views as auth_views
 from django.views.generic import TemplateView
 from . import views
 
@@ -11,17 +11,21 @@ urlpatterns = [
     
    
     path('', views.Home.as_view(), name = 'home'),
-    path('home/', views.Home.as_view(), name = 'home'),
-   # path('register/', views.SignUpView.as_view(), name = 'register'),
-   # path('registrate_sesion/', views.SignUpView.as_view(), name='register'),
-   # path('inicia_sesion/', views.SignInView.as_view(), name='sign_in'),
-    #path('cerrar_sesion', views.SignOutView.as_view(), name='sign_out'),
+    path("accounts/login/", auth_views.LoginView.as_view(), name='register'),
+    
     path('main/', views.MainView.as_view(), name='main'),
     path('<int:pk>/', views.DetailView.as_view(), name='detail'),
     path('<int:pk>/results/', views.ResultView.as_view(), name='results'),
     path('<int:question_id>/vote/', views.vote, name='vote'),
-    path('create_Polls/', views.CreatePollView.as_view(), name='createPoll'),
-   
+ 
+#accounts/login/ [name='login']
+#accounts/logout/ [name='logout']
+#accounts/password_change/ [name='password_change']
+#accounts/password_change/done/ [name='password_change_done']
+#accounts/password_reset/ [name='password_reset']
+#accounts/password_reset/done/ [name='password_reset_done']
+#accounts/reset/<uidb64>/<token>/ [name='password_reset_confirm']
+#accounts/reset/done/ [name='password_reset_complete']
    
 ]
 

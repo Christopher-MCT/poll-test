@@ -72,8 +72,8 @@ TEMPLATES = [
 WSGI_APPLICATION = 'mysite.wsgi.application'
 
 # User URLS for logins
-LOGIN_URL = '/inicia-sesion/'
-LOGIN_REDIRECT_URL = 'home/'
+LOGIN_URL = 'accounts/login/'
+LOGIN_REDIRECT_URL = 'main/'
 LOGOUT_REDIRECT_URL = '/'
 
 

@@ -4,3 +4,8 @@
 
 #Este es el mero chacala
 #https://developer.mozilla.org/es/docs/Learn/Server-side/Django/Authentication
+
+##  este te servirá para ver donde puedes redirigir a los usuarios dependiendo sus permisos
+# o almenos como ejemplo de los permisos
+
+# https://es.stackoverflow.com/questions/274617/re-direccionamiento-seg%C3%BAn-grupo-de-usuario-django-2-2-2

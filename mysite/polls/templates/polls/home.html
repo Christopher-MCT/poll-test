@@ -9,13 +9,7 @@
         <link rel="stylesheet" href="{% static 'polls/home.css' %}">
   
         
-    {% if user.is_authenticated %}
-        <h1>Hola {{ user.username }}</h1>
-        <a href="{% url 'polls:sign_out' %}">Cerrar sesión</a>
-    {% else %}
-        <a href="{% url 'polls:register' %}">Registrate</a>
-        <a href="{% url 'polls:sign_in' %}">Iniciar sesión</a>
-    {% endif %}
+  
 
         <h1>Hola esta es otra prueba</h1>
 
@@ -25,7 +19,7 @@
                
             </div>
             
-                <a  class="pie" href="{% url 'polls:main' %}">Vamos a ello</a>
+                <a  class="pie" href="{% url 'polls:register' %}">Vamos a ello</a>
            
             </div>
         </div>
