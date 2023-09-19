@@ -9,7 +9,8 @@
         <link rel="stylesheet" href="{% static 'polls/home.css' %}">
   
         
-  
+        Hi {{ user.username }}!
+        <p><a href="{% url 'logout' %}">Log Out</a></p>
 
         <h1>Hola esta es otra prueba</h1>
 

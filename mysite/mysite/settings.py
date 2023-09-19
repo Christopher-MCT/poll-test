@@ -74,6 +74,7 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # User URLS for logins
 LOGIN_URL = 'accounts/login/'
 LOGIN_REDIRECT_URL = '/main/'
+LOGOUT_REDIRECT_URL = "/home/"
 LOGOUT_REDIRECT_URL = '/'
 
 

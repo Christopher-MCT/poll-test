@@ -3,14 +3,13 @@ from django.shortcuts import render, get_object_or_404, redirect, reverse
 from .models import Question, Choice
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.models import User
+from django.contrib.auth import logout
 from django.contrib.auth import authenticate, login
-from django.contrib.auth.decorators import login_required
-from django.utils.decorators import method_decorator
-from django.urls import reverse
+
 from django.views import View, generic
-from django.views.generic import TemplateView, CreateView
+from django.views.generic import TemplateView
 from django.utils import timezone
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect
 
 
 
@@ -95,5 +94,9 @@ class LoginView(View):
 
         
 
-    
+def logout_view(request):
+    logout(request)
+    #redirigiendo al home
+    return redirect(reverse('polls:home'))
+ 
     

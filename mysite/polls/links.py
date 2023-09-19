@@ -9,3 +9,6 @@
 # o almenos como ejemplo de los permisos
 
 # https://es.stackoverflow.com/questions/274617/re-direccionamiento-seg%C3%BAn-grupo-de-usuario-django-2-2-2
+
+
+# https://learndjango.com/tutorials/django-login-and-logout-tutorial
