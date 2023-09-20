@@ -12,7 +12,8 @@ urlpatterns = [
    
     path('', views.Home.as_view(), name = 'home'),
     path("accounts/login/", views.LoginView.as_view(), name='register'),
-    path("accounts/logout/", views.LoginView.as_view(), name='log-out'),
+    path("accounts/logout/", views.logout_view, name='log-out'),
+   # path("accounts/logout/", views.LogoutView.as_view(), name='log-out'),
     path('main/', views.MainView.as_view(), name='main'),
     path('<int:pk>/', views.DetailView.as_view(), name='detail'),
     path('<int:pk>/results/', views.ResultView.as_view(), name='results'),

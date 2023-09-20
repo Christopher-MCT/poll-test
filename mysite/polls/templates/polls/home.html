@@ -1,7 +1,19 @@
 {% extends "base.html" %}
+
 {% load static %}
 
 
+
+
+{% if next %}
+    {% if user.is_authenticated %}
+   
+    <p>Your account doesn't have access to this page. To proceed,
+    please login with an account that has access.</p>
+    {% else %}
+    <p>Please login to see this page.</p>
+    {% endif %}
+{% endif %}
 
 
 
@@ -9,8 +21,7 @@
         <link rel="stylesheet" href="{% static 'polls/home.css' %}">
   
         
-        Hi {{ user.username }}!
-        <p><a href="{% url 'logout' %}">Log Out</a></p>
+        
 
         <h1>Hola esta es otra prueba</h1>
 
@@ -20,7 +31,7 @@
                
             </div>
             
-                <a  class="pie" href="{% url 'polls:register' %}">Vamos a ello</a>
+                <a  class="pie" href="{% url 'polls:main' %}">Vamos a ello</a>
            
             </div>
         </div>
