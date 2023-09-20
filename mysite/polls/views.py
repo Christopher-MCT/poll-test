@@ -31,7 +31,7 @@ class MainView(generic.ListView):
     def get(self, request):
        # import pdb; pdb.set_trace()
         if  not request.user.is_authenticated:
-            messages.warning(request, 'MENSAJE: Usuario no logeado')
+           # messages.warning(request, 'MENSAJE: Usuario no logeado')
             return redirect(reverse('polls:register'))
         else:
            # messages.warning(request, 'MENSAJE: si is log')
@@ -44,14 +44,16 @@ class MainView(generic.ListView):
     
 
 class DetailView(generic.DetailView):
+    import pdb; pdb.set_trace()   
     model = Question
     template_name = 'polls/detail.html'
 
+
     def get_queryset(self):
+        
         """
         Excludes any questions that aren't published yet.
         """
-
         return Question.objects.filter(pub_date__lte = timezone.now())
     
     def get(self, request):
@@ -107,6 +109,7 @@ class LoginView(auth_views.LoginView):
             return render(request, self.template_name)   
 
     def post(self, request):
+        form = LoginForm()
         #import pdb; pdb.set_trace()
         username = request.POST['username']
         password = request.POST['password']
@@ -119,12 +122,15 @@ class LoginView(auth_views.LoginView):
             return redirect('polls:main')  #  redirigir al usuario después de iniciar sesión.
         else:
             # Handle authentication failure (e.g., show an error message)
-            messages.error(request, 'La contraseña/usuario son incorrectos, verifica los datosn')
-            return render(request, self.template_name, {'error_message': 'Invalid login credentials'})
+            messages.error(request, 'La contraseña o el usuario son incorrectos, verifica los datos')
+            form = LoginForm()
+            return render(request, self.template_name, {'form': form}) 
+        
+        
 
 
 def logout_view(request):
-    logout(request)
+    logout(request)#toma el request de la pagina con el url asignado y retornar la peticion
     messages.warning(request, 'MENSAJE: El usuario ha cerrado la sesion')
     #redirigiendo al home
     return redirect(reverse('polls:home'))

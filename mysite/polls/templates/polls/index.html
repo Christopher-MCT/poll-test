@@ -4,7 +4,7 @@
 <link rel="stylesheet" href="{% static 'polls/style.css' %}">
 
     {% if user.is_authenticated %}
-  <h3>  Hi {{ user.username }}! </h3>
+    <h3>  Hi {{ user.username }}! </h3>
     <p><a href="{% url 'polls:log-out' %}">Log Out</a></p> 
     {% else %}
    {#No mostrará nada#}
