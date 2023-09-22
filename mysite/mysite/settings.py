@@ -27,7 +27,8 @@ SECRET_KEY = 'django-insecure-xy085ceu@7@p$soryc^g*j-qszj3czkk&51mm9t&7@24_*tx&f
 DEBUG = True
 MESSAGE_LEVEL = message_constants.DEBUG
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*',
+                 ]
 
 
 # Application definition
@@ -99,6 +100,9 @@ DATABASES = {
         'PASSWORD': 'password',
         "HOST": "localhost",
         "PORT": "5432",
+        'TEST': {
+            'NAME': 'test_finance',
+        },
     }
 }
 

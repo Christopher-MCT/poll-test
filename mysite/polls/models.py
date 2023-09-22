@@ -1,10 +1,9 @@
+import datetime
+
 from django.db import models
 from django.contrib import admin
 from django.contrib.auth.models import User
-import datetime
 from django.utils import timezone
-from django.dispatch import receiver
-from django.db.models.signals import post_save
 
 
 

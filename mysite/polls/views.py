@@ -16,35 +16,42 @@ from django.http import HttpResponseRedirect
 
 
 
-
-
-
-
 class Home(TemplateView):
     template_name = 'polls/home.html'
 
 
-class MainView(generic.ListView):
+class MainView(generic.list.ListView):
+    model = Question
     template_name = 'polls/index.html'
-    context_object_name = 'latest_question_list'
+    
+      
+    def get_context_data(self, **kwargs):
+        self.object_list = self.get_queryset()
+        context = super(MainView, self).get_context_data(**kwargs)
+        # Create any data and add it to the context
+      #  print(context)
+        return context
+    
+    def get_object(self):
+        return Question.objects.all().order_by('-pub_date')
+
     
     def get(self, request):
-       # import pdb; pdb.set_trace()
         if  not request.user.is_authenticated:
-           # messages.warning(request, 'MENSAJE: Usuario no logeado')
+        # messwages.warning(request, 'MENSAJE: Usuario no logeado')
             return redirect(reverse('polls:register'))
         else:
-           # messages.warning(request, 'MENSAJE: si is log')
-            return render(request, self.template_name)
+            
+            #import pdb; pdb.set_trace()
+            context = self.get_context_data()
+            return render(request, self.template_name, context)
 
-    def get_queryset(self):
-        """Return the last five published questions"""
-        return Question.objects.filter(pub_date__lte=timezone.now()).order_by('-pub_date')[:5]
+    
     
     
 
 class DetailView(generic.DetailView):
-    import pdb; pdb.set_trace()   
+    #import pdb; pdb.set_trace()   
     model = Question
     template_name = 'polls/detail.html'
 
@@ -56,12 +63,8 @@ class DetailView(generic.DetailView):
         """
         return Question.objects.filter(pub_date__lte = timezone.now())
     
-    def get(self, request):
-        # import pdb; pdb.set_trace()
-        if request.user.is_authenticated:
-            return redirect(reverse('polls:main'))
-        else: 
-            return render(request, self.template_name)
+   
+        
    
 def vote(request, question_id):
         question = get_object_or_404(Question, pk=question_id)
@@ -88,7 +91,7 @@ class ResultView(generic.DetailView):
 
 ##NEW LINES
 
-#Te quedatse desde aquí para organizar lo del form, importar remember
+
 
 class LoginView(auth_views.LoginView):
     template_name = 'registration/login.html'
