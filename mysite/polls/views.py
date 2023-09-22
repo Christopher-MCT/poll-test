@@ -2,15 +2,15 @@
 from django.shortcuts import render, get_object_or_404, redirect 
 
 from django.contrib.auth import authenticate, login, logout
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 
-from .models import Question, Choice
-from .forms import LoginForm
+from .models import Question, Choice, CreateQues
+from .forms import LoginForm, CreateQuestionForm
 
 from django.contrib.auth import views as auth_views
 from django.contrib import messages
 from django.views import generic
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.utils import timezone
 from django.http import HttpResponseRedirect
 
@@ -46,10 +46,6 @@ class MainView(generic.list.ListView):
             context = self.get_context_data()
             return render(request, self.template_name, context)
 
-    
-    
-    
-
 class DetailView(generic.DetailView):
     #import pdb; pdb.set_trace()   
     model = Question
@@ -61,10 +57,7 @@ class DetailView(generic.DetailView):
         """
         Excludes any questions that aren't published yet.
         """
-        return Question.objects.filter(pub_date__lte = timezone.now())
-    
-   
-        
+        return Question.objects.filter(pub_date__lte = timezone.now())      
    
 def vote(request, question_id):
         question = get_object_or_404(Question, pk=question_id)
@@ -89,9 +82,7 @@ class ResultView(generic.DetailView):
     template_name = 'polls/results.html'
 
 
-##NEW LINES
-
-
+##  LOGIN VEW   #######
 
 class LoginView(auth_views.LoginView):
     template_name = 'registration/login.html'
@@ -128,20 +119,40 @@ class LoginView(auth_views.LoginView):
             messages.error(request, 'La contraseña o el usuario son incorrectos, verifica los datos')
             form = LoginForm()
             return render(request, self.template_name, {'form': form}) 
-        
-        
-
 
 def logout_view(request):
     logout(request)#toma el request de la pagina con el url asignado y retornar la peticion
     messages.warning(request, 'MENSAJE: El usuario ha cerrado la sesion')
     #redirigiendo al home
     return redirect(reverse('polls:home'))
- 
-"""class LogoutView(View):
-    def get(self, request):
-        if request.user.is_authenticated:
-         del request.session['user']
-        else:
-          messages.warning(request, 'la verdad estamos checando si entra o no')
-        return redirect(reverse('polls:home'))"""
+
+##      CRUD VIEWS          #####
+
+
+class TaskListView(ListView):
+    model = CreateQues
+    template_name = 'ques_list.html'
+    context_object_name = 'tasks'
+
+class TaskDetailView(DetailView):
+    model = CreateQues
+    template_name = 'crud/ques_detail.html'
+
+
+class TaskCreateView(CreateView):
+    model = CreateQues
+    form_class = CreateQuestionForm
+    template_name = 'crud/ques_form.html'
+    success_url = reverse_lazy('ques_list')
+
+
+class TaskUpdateView(UpdateView):
+    model = CreateQues
+    form_class = CreateQuestionForm
+    template_name = 'crud/task_form.html'
+    success_url = reverse_lazy('ques_list')
+
+class TaskDeleteView(DeleteView):
+    model = CreateQues
+    template_name = 'task_manager/task_confirm_delete.html'
+    success_url = reverse_lazy('task_list')
