@@ -43,6 +43,10 @@ class CreateQues(models.Model):
    completed = models.BooleanField(default=False)
    created_at = models.DateTimeField(auto_now_add=True)
 
+
+#https://swapps.com/es/blog/trabajando-con-formularios-anidados-con-django/
+
+
 #>>> from polls.models import Choice, Question  # Import the model classes we just wrote.
 #
 ## No questions are in the system yet.
